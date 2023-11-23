@@ -1,5 +1,5 @@
 # dice-app
-COMIT 플러터 스터디 실습
+COMIT 플러터 스터디 실습1
 
 ### 새롭게 알게 된 점
 - Navigation
@@ -9,7 +9,5 @@ COMIT 플러터 스터디 실습
 - TextFormField와 Controller
 - palette, gaps로 Color와 SizedBox 제어
 
-### 추가로 구현할 것
-- ID와 Password 조건 미충족시 login 못하게
-- DiceScreen에서 dice 굴릴 때 애니메이션 주기?
-
+### 추가 구현
+- DiceScreen 에서 주사위 굴리는 애니메이션 (Timer 응용)
