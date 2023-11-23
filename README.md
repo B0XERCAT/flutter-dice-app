@@ -1,4 +1,4 @@
-# dice-app``
+# dice-app
 COMIT 플러터 스터디 실습
 
 ### 새롭게 알게 된 점

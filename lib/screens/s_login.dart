@@ -15,11 +15,28 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController id_controller = TextEditingController();
   TextEditingController pw_controller = TextEditingController();
-  // states
-  // login information
-  // id, pw
+
   var userId = '';
   var password = '';
+
+  void alertIdAndPwEmpty() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text('The Username/Password field is empty!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       userId = id_controller.text;
                       password = pw_controller.text;
+                      if (userId == "" || password == "") {
+                        alertIdAndPwEmpty();
+                        return;
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(

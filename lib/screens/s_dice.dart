@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:after_layout/after_layout.dart';
 
 import 'package:flutter/material.dart';
 import 'package:login_example/constants/gaps.dart';
 import 'package:login_example/constants/palette.dart';
+import 'package:lottie/lottie.dart';
 
 int generateRandomNumber() {
   Random random = Random();
@@ -21,6 +23,8 @@ class DiceScreen extends StatefulWidget {
 class _DiceScreenState extends State<DiceScreen>
     with AfterLayoutMixin<DiceScreen> {
   var randNumber = generateRandomNumber();
+  bool isLoading = true;
+  final delay = 1000;
 
   @override
   void afterFirstLayout(BuildContext context) {
@@ -34,6 +38,11 @@ class _DiceScreenState extends State<DiceScreen>
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                Timer(Duration(milliseconds: delay), () {
+                  setState(() {
+                    isLoading = false;
+                  });
+                });
               },
               child: Text('OK'),
             ),
@@ -96,16 +105,25 @@ class _DiceScreenState extends State<DiceScreen>
           children: [
             gap70h,
             Center(
-              child: Image.asset(
-                'assets/images/dice$randNumber.png',
-                height: 250,
-              ),
+              child: isLoading
+                  ? Lottie.asset('assets/animations/diceLoading.json',
+                      height: 300)
+                  : Image.asset(
+                      'assets/images/dice$randNumber.png',
+                      height: 300,
+                    ),
             ),
             gap30h,
             GestureDetector(
               onTap: () {
                 setState(() {
                   randNumber = generateRandomNumber();
+                  isLoading = true;
+                  Timer(Duration(milliseconds: delay), () {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  });
                 });
               },
               child: Icon(
