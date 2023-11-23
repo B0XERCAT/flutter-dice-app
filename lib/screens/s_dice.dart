@@ -103,32 +103,52 @@ class _DiceScreenState extends State<DiceScreen>
       body: Container(
         child: Column(
           children: [
-            gap70h,
+            gap100h,
             Center(
               child: isLoading
-                  ? Lottie.asset('assets/animations/diceLoading.json',
+                  ? Lottie.asset('assets/animations/dice_loading.json',
                       height: 300)
                   : Image.asset(
                       'assets/images/dice$randNumber.png',
                       height: 300,
                     ),
             ),
-            gap30h,
+            gap70h,
             GestureDetector(
               onTap: () {
                 setState(() {
                   randNumber = generateRandomNumber();
                   isLoading = true;
-                  Timer(Duration(milliseconds: delay), () {
-                    setState(() {
-                      isLoading = false;
-                    });
-                  });
+                  Timer(
+                    Duration(milliseconds: delay),
+                    () {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  );
                 });
               },
-              child: Icon(
-                Icons.restart_alt_rounded,
-                size: 50,
+              child: Container(
+                width: 300,
+                height: 45,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Palette.themeColor,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'ROLL DICE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        color: Palette.darkGrey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
